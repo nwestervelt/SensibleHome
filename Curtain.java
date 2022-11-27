@@ -2,8 +2,8 @@
 
 public class Curtain extends Device
 {
-    public Curtain(int deviceID)
+    public Curtain(int deviceID, boolean adminOnly)
     {
-        super(deviceID);
+        super(deviceID, adminOnly);
     }
 }

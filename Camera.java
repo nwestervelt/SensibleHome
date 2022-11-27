@@ -2,8 +2,8 @@
 
 public class Camera extends Device
 {
-    public Camera(int deviceID)
+    public Camera(int deviceID, boolean adminOnly)
     {
-        super(deviceID);
+        super(deviceID, adminOnly);
     }
 }

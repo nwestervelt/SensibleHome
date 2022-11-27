@@ -2,8 +2,8 @@
 
 public class CameraDoorBell extends Device
 {
-    public CameraDoorBell(int deviceID)
+    public CameraDoorBell(int deviceID, boolean adminOnly)
     {
-        super(deviceID);
+        super(deviceID, adminOnly);
     }
 }
