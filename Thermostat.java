@@ -2,8 +2,8 @@
 
 public class Thermostat extends Device
 {
-    public Thermostat(int deviceID, boolean adminOnly)
+    public Thermostat(int deviceID)
     {
-        super(deviceID, adminOnly);
+        super(deviceID);
     }
 }

@@ -2,8 +2,8 @@
 
 public class DoorLock extends Device
 {
-    public DoorLock(int deviceID, boolean adminOnly)
+    public DoorLock(int deviceID)
     {
-        super(deviceID, adminOnly);
+        super(deviceID);
     }
 }
