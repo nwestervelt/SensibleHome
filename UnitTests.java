@@ -12,7 +12,7 @@ public class UnitTests
     public void setUp()
     {
         mc = new MainClass();
-        therm = new Thermostat(0, false);
+        therm = new Thermostat(0);
     }
     //Thermostat default value test
     @Test
