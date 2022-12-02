@@ -2,8 +2,8 @@
 
 public class Light extends Device
 {
-    public Light(int deviceID, boolean adminOnly)
+    public Light(int deviceID)
     {
-        super(deviceID, adminOnly);
+        super(deviceID);
     }
 }

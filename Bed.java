@@ -2,8 +2,8 @@
 
 public class Bed extends Device
 {
-    public Bed(int deviceID, boolean adminOnly)
+    public Bed(int deviceID)
     {
-        super(deviceID, adminOnly);
+        super(deviceID);
     }
 }
