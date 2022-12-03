@@ -6,4 +6,11 @@ public class DoorLock extends Device
     {
         super(deviceID);
     }
+    public boolean isDoorLocked()
+    {
+        return true;
+    }
+    public void toggleDoorLock()
+    {
+    }
 }
