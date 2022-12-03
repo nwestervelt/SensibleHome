@@ -6,4 +6,11 @@ public class Curtain extends Device
     {
         super(deviceID);
     }
+    public boolean isCurtainClosed()
+    {
+        return true;
+    }
+    public void toggleCurtainClosed()
+    {
+    }
 }

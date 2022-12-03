@@ -6,4 +6,11 @@ public class Light extends Device
     {
         super(deviceID);
     }
+    public int getDim()
+    {
+        return 30;
+    }
+    public void setDim(int dim)
+    {
+    }
 }

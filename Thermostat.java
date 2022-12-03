@@ -6,4 +6,11 @@ public class Thermostat extends Device
     {
         super(deviceID);
     }
+    public int getTemp()
+    {
+        return 50;
+    }
+    public void setTemp(int temp)
+    {
+    }
 }
