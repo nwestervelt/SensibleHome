@@ -98,7 +98,7 @@ public class MainClass
                         {
                             for(int i = 0; i < deviceList.size(); i++)
                             {
-                                if(deviceList.get(i).getDeviceID() == Integer.parseInt(command[1]))
+                                if(deviceList.get(i).getDeviceID() == Integer.parseInt(command[2]))
                                     deviceList.remove(i);
                             }
                         }
@@ -126,8 +126,8 @@ public class MainClass
                         }
                         //do a command acting within a device
                         else
-                            doDeviceCommand(command[0], Integer.parseInt(command[1]),
-                                Integer.parseInt(command[2]));
+                            doDeviceCommand(command[0], Integer.parseInt(command[2]),
+                                Integer.parseInt(command[3]));
                     }
                     //sleep to keep from using CPU cycles unnecessarily while waiting
                     sleep(50);
