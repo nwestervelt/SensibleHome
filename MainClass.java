@@ -66,7 +66,9 @@ public class MainClass
                 {
                     if(in.hasNext())
                     {
+                        out.println("Ground control to Major Tom!");
                         String[] command = in.nextLine().split(",");
+                        System.out.println("I am here: " + (String)command[0]);
 
                         //print out the command for debugging purposes
                         System.out.println(command[0]);
@@ -111,7 +113,7 @@ public class MainClass
                                     out.println("Bed," + device.getDeviceID());
                                 
                                 else if(device instanceof Curtain)
-                                    out.println("Curtain " + device.getDeviceID());
+                                    out.println("Curtain, " + device.getDeviceID());
 
                                 else if(device instanceof DoorLock)
                                     out.println("DoorLock," + device.getDeviceID());
@@ -124,6 +126,21 @@ public class MainClass
                             }
                             out.println("done");
                         }
+                        //THIS IS A TEST CASE, REMOVE BEFORE PUSHING
+
+                        else if(command[0].equals("test"))
+                        {
+                            System.out.println("I GOT HERE 2ND");
+                            System.out.println("Device input: " + command[1]);
+                            System.out.println("Device ID: " + command[2]);
+                            System.out.println("Parameter Requested: " + command[3]);
+                            out.println("I GOT HERE 3RD");
+                            out.println("Device input: " + command[1]);
+                            out.println("Device ID: " + command[2]);
+                            out.println("Parameter Requested: " + command[3]);
+                        }
+
+                        //THIS IS A TEST CASE, REMOVE BEFORE PUSHING
                         //do a command acting within a device
                         else
                             doDeviceCommand(command[0], Integer.parseInt(command[2]),
