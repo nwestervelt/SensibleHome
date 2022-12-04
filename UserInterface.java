@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
+import java.util.*;
 import javax.swing.*;
 
 public class UserInterface extends JFrame
@@ -11,6 +12,7 @@ public class UserInterface extends JFrame
     private PrintWriter out;
     private Socket sock;
     private JButton connectButton, testButton, quitButton;
+    private JComboBox<String> deviceCB;
 
     public UserInterface()
     {
@@ -38,6 +40,10 @@ public class UserInterface extends JFrame
         quitButton.addActionListener(ah);
         quitButton.setEnabled(false);
         mainPanel.add(quitButton);
+
+        mainPanel.add(new JLabel("Devices: "));
+        deviceCB=new JComboBox<String>();
+        mainPanel.add(deviceCB);
 
         //set appearance and behavior of the window
         pack();
@@ -67,21 +73,32 @@ public class UserInterface extends JFrame
                         //create PrintWriter for writing to socket
                         out = new PrintWriter(sock.getOutputStream(), true);
 
+                        Scanner in = new Scanner(sock.getInputStream());
+                        System.out.println("Hello, you sonofabitch!");
+                        
+                        String testString = "test,Thermostat,1,temp";
+                        out.println(testString);
+                        System.out.println(in.nextLine());
+                        System.out.println("Major Tom to Ground Control");
+
                         //update enabled status of buttons
                         connectButton.setEnabled(false);
                         testButton.setEnabled(true);
                         quitButton.setEnabled(true);
+
+                        //TODO: populate combobox
+                        
                     }
                     catch(Exception ex)
                     {
-                        System.out.println(ex);
+                        System.out.println("You dingus, " + ex);
                     }
                 }
             }
             else if(e.getSource() == testButton)
             {
-                //sends "test" text over socket
-                out.println("test");
+                //sends "testing" text over socket
+                out.println("testing");
             }
             else if(e.getSource() == quitButton)
             {
