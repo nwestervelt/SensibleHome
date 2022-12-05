@@ -7,6 +7,7 @@ import java.util.*;
 public class MainClass
 {
     private ArrayList<Device> deviceList;
+    private int nextID;
 
     public MainClass()
     {
@@ -47,7 +48,7 @@ public class MainClass
             try
             {
                 in = new Scanner(sock.getInputStream());
-                out = new PrintWriter(sock.getOutputStream());
+                out = new PrintWriter(sock.getOutputStream(), true);
             }
             catch(IOException ioe)
             {
@@ -66,9 +67,8 @@ public class MainClass
                 {
                     if(in.hasNext())
                     {
-                        out.println("Ground control to Major Tom!");
+                        //out.println("Ground control to Major Tom!"); //Test Material
                         String[] command = in.nextLine().split(",");
-                        System.out.println("I am here: " + (String)command[0]);
 
                         //print out the command for debugging purposes
                         System.out.println(command[0]);
@@ -81,26 +81,28 @@ public class MainClass
                         if(command[0].equals("add"))
                         {
                             if(command[1].equals("Bed"))
-                                deviceList.add(new Bed(Integer.parseInt(command[2])));
+                                deviceList.add(new Bed(Integer.parseInt(command[2].trim())));
 
                             else if(command[1].equals("Curtain"))
-                                deviceList.add(new Curtain(Integer.parseInt(command[2])));
+                                deviceList.add(new Curtain(Integer.parseInt(command[2].trim())));
 
                             else if(command[1].equals("DoorLock"))
-                                deviceList.add(new DoorLock(Integer.parseInt(command[2])));
+                                deviceList.add(new DoorLock(Integer.parseInt(command[2].trim())));
 
                             else if(command[1].equals("Light"))
-                                deviceList.add(new Light(Integer.parseInt(command[2])));
+                                deviceList.add(new Light(Integer.parseInt(command[2].trim())));
 
                             else if(command[1].equals("Thermostat"))
-                                deviceList.add(new Thermostat(Integer.parseInt(command[2])));
+                                deviceList.add(new Thermostat(Integer.parseInt(command[2].trim())));
+                            //Increment the deviceID value
+                            nextID++;
                         }
                         //remove a device
                         else if(command[0].equals("remove"))
                         {
                             for(int i = 0; i < deviceList.size(); i++)
                             {
-                                if(deviceList.get(i).getDeviceID() == Integer.parseInt(command[2]))
+                                if(deviceList.get(i).getDeviceID() == Integer.parseInt(command[2].trim()))
                                     deviceList.remove(i);
                             }
                         }
@@ -126,25 +128,16 @@ public class MainClass
                             }
                             out.println("done");
                         }
-                        //THIS IS A TEST CASE, REMOVE BEFORE PUSHING
-
-                        else if(command[0].equals("test"))
+                        //get next available device ID
+                        else if(command[0].equals("getNextID"))
                         {
-                            System.out.println("I GOT HERE 2ND");
-                            System.out.println("Device input: " + command[1]);
-                            System.out.println("Device ID: " + command[2]);
-                            System.out.println("Parameter Requested: " + command[3]);
-                            out.println("I GOT HERE 3RD");
-                            out.println("Device input: " + command[1]);
-                            out.println("Device ID: " + command[2]);
-                            out.println("Parameter Requested: " + command[3]);
+                            out.println(nextID);
                         }
-
-                        //THIS IS A TEST CASE, REMOVE BEFORE PUSHING
+                        
                         //do a command acting within a device
                         else
-                            doDeviceCommand(command[0], Integer.parseInt(command[2]),
-                                Integer.parseInt(command[3]));
+                            doDeviceCommand(command[0].trim(), Integer.parseInt(command[2].trim()),
+                                Integer.parseInt(command[3].trim()));
                     }
                     //sleep to keep from using CPU cycles unnecessarily while waiting
                     sleep(50);
