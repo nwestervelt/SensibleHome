@@ -45,12 +45,6 @@ public class UserInterface extends JFrame
         connectButton.addActionListener(ah);
         mainPanel.add(connectButton);
 
-        //create testButton and add event handling
-        /*testButton = new JButton("Test");
-        testButton.addActionListener(ah);
-        testButton.setEnabled(false);
-        mainPanel.add(testButton);*/ //Test material
-
         //create quitButton and add event handling
         quitButton = new JButton("Quit");
         quitButton.addActionListener(ah);
@@ -120,14 +114,7 @@ public class UserInterface extends JFrame
 
                         //create Scanner for reading from socket
                         in = new Scanner(sock.getInputStream());
-                        
-                        /*String testString = "test,Thermostat,1,temp";
-                        out.println(testString);
-                        System.out.println(in.nextLine());
-                        System.out.println(in.nextLine());
-                        System.out.println(in.nextLine());
-                        System.out.println(in.nextLine());
-                        System.out.println("Major Tom to Ground Control"); */ //Test Materials
+
 
                         //update enabled status of buttons
                         connectButton.setEnabled(false);
@@ -233,23 +220,7 @@ public class UserInterface extends JFrame
 
                 //blocks here while dialog box is visible
                 exD.setVisible(true);
-                    /* if (selection[0].equals("Bed") | selection[0].equals("Thermostat"))
-                    {
-                        System.out.println("It is, indeed, a thermostat or bed.");
-                        exD.isTemp();
-                    }
-                    else if(selection[0].equals("Light"))
-                    {
-                        exD.isLight();
-                    }
-                    else if(selection[0].equals("DoorLock"))
-                    {
-                        exD.isDoor();
-                    }
-                    else if(selection[0].equals("Curtain"))
-                    {
-                        exD.isCurtain();
-                    } */
+                
                 //if update button in dialog box was clicked, change appropriate attributes in given device
                 if(exD.update)
                 {
@@ -560,33 +531,6 @@ public class UserInterface extends JFrame
                 curtainCheck.setSelected(Boolean.parseBoolean(in.nextLine()));
             }
         }
-        /* public void isTemp()
-        {
-            curtainPanel.setVisible(false);
-            doorPanel.setVisible(false);
-            lightPanel.setVisible(false);
-        }
-        
-        public void isLight()
-        {
-            curtainPanel.setVisible(false);
-            doorPanel.setVisible(false);
-            lightPanel.setVisible(false);
-        }
-        
-        public void isDoor()
-        {
-            curtainPanel.setVisible(false);
-            doorPanel.setVisible(false);
-            lightPanel.setVisible(false);
-        }
-        
-        public void isCurtain()
-        {
-            curtainPanel.setVisible(false);
-            doorPanel.setVisible(false);
-            lightPanel.setVisible(false);
-        } */
     }
     public static void main(String[] args)
     {
