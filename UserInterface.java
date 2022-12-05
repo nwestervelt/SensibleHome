@@ -60,6 +60,7 @@ public class UserInterface extends JFrame
 
         JLabel cbLabel = new JLabel("Devices: ");
         cbPanel.add(cbLabel);
+        
         deviceCB = new JComboBox<String>();
         deviceCB.addItem(def);
         deviceCB.addActionListener(new ActionListener()
