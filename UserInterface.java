@@ -6,6 +6,7 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 
 public class UserInterface extends JFrame
@@ -64,21 +65,35 @@ public class UserInterface extends JFrame
         deviceCB = new JComboBox<String>();
         deviceCB.addItem(def);
         deviceCB.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
             {
-                public void actionPerformed(ActionEvent e)
+                if((deviceCB.getSelectedIndex() != 0) & !connectButton.isEnabled())
                 {
-                    if((deviceCB.getSelectedIndex() != 0) & !connectButton.isEnabled())
-                    {
-                        expandButton.setEnabled(true);
-                        deleteButton.setEnabled(true);
-                    }
-                    else
-                    {
-                        expandButton.setEnabled(false);
-                        deleteButton.setEnabled(false);
-                    }
+                    expandButton.setEnabled(true);
+                    deleteButton.setEnabled(true);
                 }
-            });
+                else
+                {
+                    expandButton.setEnabled(false);
+                    deleteButton.setEnabled(false);
+                }
+            }
+        });
+        deviceCB.addPopupMenuListener(new PopupMenuListener()
+        {
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e)
+            {
+                refreshDevices();
+            }
+            //the remaining methods have to be declared, because PopupMenuListener is an interface
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e)
+            {
+            }
+            public void popupMenuCanceled(PopupMenuEvent e)
+            {
+            }
+        });
         cbPanel.add(deviceCB);
 
         cbPanel.add(expandButton);
@@ -88,6 +103,36 @@ public class UserInterface extends JFrame
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+    //update the devices in the combo box
+    private void refreshDevices()
+    {
+        //calls for deviceList and prints it out;
+        out.println("getDeviceList,0,0,0");
+        deviceCB.removeAllItems();
+        deviceCB.addItem("Choose a device");
+        while(in.hasNext())
+        {
+            line = in.nextLine();
+
+            if(line.equals("done")) //The "done" message is for debugging, and should not be included in anything other than printing to terminal to confirm connection
+            {
+                System.out.println(line);
+                break;
+            }
+            else 
+            {
+                String[] deviceInfo = line.split(",");
+                String info = deviceInfo[0] + "   ID:   " + deviceInfo[1];
+                deviceCB.addItem(info);
+                System.out.println(line);
+            }
+        }
+
+        //resets the String variables "line" and "passIn"
+        line = "";
+        passIn = "";
+
     }
     //class for handling user interface events (buttons clicked, etc..)
     //NOTE: The protocol for passing commands over the socket is formatted as: commandName,deviceType,deviceID,parameter
@@ -154,31 +199,7 @@ public class UserInterface extends JFrame
                     passIn = "add," + deviceType + "," + deviceID + ",0";
                     out.println(passIn);
 
-                    //calls for deviceList and prints it out;
-                    out.println("getDeviceList,0,0,0");
-                    deviceCB.removeAllItems();
-                    deviceCB.addItem("Choose a device");
-                    while(in.hasNext())
-                    {
-                        line = in.nextLine();
-
-                        if(line.equals("done")) //The "done" message is for debugging, and should not be included in anything other than printing to terminal to confirm connection
-                        {
-                            System.out.println(line);
-                            break;
-                        }
-                        else 
-                        {
-                            String[] deviceInfo = line.split(",");
-                            String info = deviceInfo[0] + "   ID:   " + deviceInfo[1];
-                            deviceCB.addItem(info);
-                            System.out.println(line);
-                        }
-                    }
-
-                    //resets the String variables "line" and "passIn"
-                    line = "";
-                    passIn = "";
+                    refreshDevices();
                 }
             }
             else if(e.getSource() == deleteButton)

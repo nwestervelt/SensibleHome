@@ -16,7 +16,7 @@ public class UnitTests
     @Test
     public void thermDefaultValueTest()
     {
-        assertEquals(therm.getTemp(), 70);
+        assertEquals(therm.getTemp(), 65);
     }
     //Thermostat negative value test
     @Test
@@ -36,7 +36,7 @@ public class UnitTests
     @Test
     public void thermPositiveTemp()
     {
-        therm.setTemp(0);
+        therm.setTemp(50);
         assertEquals(therm.getTemp(), 50);
     }
 }
