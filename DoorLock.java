@@ -2,7 +2,9 @@
 
 public class DoorLock extends Device
 {
-    public DoorLock(int deviceID)
+   boolean doorLock;
+
+   public DoorLock(int deviceID)
     {
         super(deviceID);
         doorLock=lock;
