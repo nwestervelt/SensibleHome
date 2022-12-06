@@ -16,9 +16,9 @@ public class Curtain extends Device
     public void toggleCurtainClosed()
     {
         if(curtain)
-        curtain = false;
-        
+            curtain = false;
+
         else 
-        curtain = true;
+            curtain = true;
     }
 }
