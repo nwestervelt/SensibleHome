@@ -2,15 +2,23 @@
 
 public class DoorLock extends Device
 {
-    public DoorLock(int deviceID)
+   boolean doorLock;
+
+   public DoorLock(int deviceID)
     {
         super(deviceID);
+        doorLock=true;
     }
     public boolean isDoorLocked()
     {
-        return true;
+        return doorLock;
     }
     public void toggleDoorLock()
     {
+       if(doorLock)
+           doorLock = false;
+
+       else
+           doorLock = true;
     }
 }
