@@ -14,7 +14,7 @@ public class Bed extends Device
     public void setTemp(int temp)
     {
         if(0<= temp && temp<= 100)
-            temp= temp;// set temperature
+           this.temp= temp;// set temperature
         else
         {
             System.out.println(
