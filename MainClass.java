@@ -7,7 +7,6 @@ import java.util.*;
 public class MainClass
 {
     private ArrayList<Device> deviceList;
-    private int nextID;
 
     public MainClass()
     {
@@ -48,7 +47,7 @@ public class MainClass
             try
             {
                 in = new Scanner(sock.getInputStream());
-                out = new PrintWriter(sock.getOutputStream(), true);
+                out = new PrintWriter(sock.getOutputStream());
             }
             catch(IOException ioe)
             {
@@ -67,7 +66,6 @@ public class MainClass
                 {
                     if(in.hasNext())
                     {
-                        //out.println("Ground control to Major Tom!"); //Test Material
                         String[] command = in.nextLine().split(",");
 
                         //print out the command for debugging purposes
@@ -81,28 +79,26 @@ public class MainClass
                         if(command[0].equals("add"))
                         {
                             if(command[1].equals("Bed"))
-                                deviceList.add(new Bed(Integer.parseInt(command[2].trim())));
+                                deviceList.add(new Bed(Integer.parseInt(command[2])));
 
                             else if(command[1].equals("Curtain"))
-                                deviceList.add(new Curtain(Integer.parseInt(command[2].trim())));
+                                deviceList.add(new Curtain(Integer.parseInt(command[2])));
 
                             else if(command[1].equals("DoorLock"))
-                                deviceList.add(new DoorLock(Integer.parseInt(command[2].trim())));
+                                deviceList.add(new DoorLock(Integer.parseInt(command[2])));
 
                             else if(command[1].equals("Light"))
-                                deviceList.add(new Light(Integer.parseInt(command[2].trim())));
+                                deviceList.add(new Light(Integer.parseInt(command[2])));
 
                             else if(command[1].equals("Thermostat"))
-                                deviceList.add(new Thermostat(Integer.parseInt(command[2].trim())));
-                            //Increment the deviceID value
-                            nextID++;
+                                deviceList.add(new Thermostat(Integer.parseInt(command[2])));
                         }
                         //remove a device
                         else if(command[0].equals("remove"))
                         {
                             for(int i = 0; i < deviceList.size(); i++)
                             {
-                                if(deviceList.get(i).getDeviceID() == Integer.parseInt(command[2].trim()))
+                                if(deviceList.get(i).getDeviceID() == Integer.parseInt(command[2]))
                                     deviceList.remove(i);
                             }
                         }
@@ -115,7 +111,7 @@ public class MainClass
                                     out.println("Bed," + device.getDeviceID());
                                 
                                 else if(device instanceof Curtain)
-                                    out.println("Curtain, " + device.getDeviceID());
+                                    out.println("Curtain " + device.getDeviceID());
 
                                 else if(device instanceof DoorLock)
                                     out.println("DoorLock," + device.getDeviceID());
@@ -128,16 +124,10 @@ public class MainClass
                             }
                             out.println("done");
                         }
-                        //get next available device ID
-                        else if(command[0].equals("getNextID"))
-                        {
-                            out.println(nextID);
-                        }
-                        
                         //do a command acting within a device
                         else
-                            doDeviceCommand(command[0].trim(), Integer.parseInt(command[2].trim()),
-                                Integer.parseInt(command[3].trim()));
+                            doDeviceCommand(command[0], Integer.parseInt(command[2]),
+                                Integer.parseInt(command[3]));
                     }
                     //sleep to keep from using CPU cycles unnecessarily while waiting
                     sleep(50);
