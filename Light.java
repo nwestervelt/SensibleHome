@@ -2,15 +2,18 @@
 
 public class Light extends Device
 {
+    private int dimLevel;
     public Light(int deviceID)
     {
         super(deviceID);
+        dimLevel=30;
     }
     public int getDim()
     {
-        return 30;
+        return dimLevel;
     }
-    public void setDim(int dim)
+    public void setDim(int dimLevel)
     {
+        this.dimLevel=dimLevel;
     }
 }
