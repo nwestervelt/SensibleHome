@@ -15,7 +15,7 @@ public class Bed extends Device
     {
         if(0<= temp && temp<= 100)
             temp= temp;// set temperature
-            else
+        else
         {
             System.out.println(
                     "New temp out of range.  Setting to default of 50F" );
