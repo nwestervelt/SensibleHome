@@ -16,11 +16,9 @@ public class DoorLock extends Device
     public void toggleDoorLock()
     {
        if(doorLock)
-       return doorLock;
-       
+           doorLock = false;
+
        else
-         toggle lock;
-           
-        }
+           doorLock = true;
     }
 }
